@@ -1,0 +1,59 @@
+﻿@model IEnumerable<UserIndexViewModel>
+
+<header class="business-header">
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            <h2 class="mt-4 text-center">What Is Blyss</h2>
+            <p>
+                As you evolve your career, you need a learning solution that inspires you to create the future. With our platform, you can keep up with the speed of technology, work smarter and faster, and gain in-demand skills in areas like cloud, mobile, security and data.
+            </p>
+            <p class="text-center">
+                <a asp-area="" asp-controller="Courses" asp-action="All" class="btn btn-primary btn-lg">Check our courses</a>
+            </p>
+        </div>
+        <div class="col-sm-4">
+            <h2 class="mt-4">Contact Us</h2>
+            <address>
+                <strong>Blyss</strong>
+                <br>Sofia
+                <br>Bulgaria
+                <br>
+            </address>
+            <address>
+                <span>
+                    <i class="fas fa-phone"></i>
+                </span>
+                (+359) 888-88-88-88
+                <br>
+                <span>
+                    <i class="fas fa-envelope"></i>
+                </span>
+                <a href="mailto:#">blyss@gmail.com</a>
+            </address>
+        </div>
+    </div>
+    <div class="row">
+        @if (Model.Any())
+        {
+            foreach (UserIndexViewModel user in Model)
+            {
+                <div class="col-sm-4 my-4">
+                    <div class="card">
+                        <img class="index-profile mt-3" src="data:image;base64,@Convert.ToBase64String(user.ProfilePicture)" alt="profile" data-toggle="dropdown"/>
+
+                        <div class="card-body">
+                            <h4 class="card-title text-center">@user.FullName</h4>
+                            <p class="card-text text-center">@user.Description</p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a asp-controller="Users" asp-action="Details" asp-route-id="@user.Id" class="btn btn-primary">View Profile!</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

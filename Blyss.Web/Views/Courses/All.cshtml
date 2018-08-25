@@ -1,0 +1,91 @@
+﻿@model CourseViewModel
+@{
+    string prevDisabled = !Model.Paged.HasPreviousPage ? "disabled" : "";
+    string nextDisabled = !Model.Paged.HasNextPage ? "disabled" : "";
+}
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-3 ">
+            <div class="list-group ">
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header text-center">
+                            Filter By:
+                        </div>
+                        <div class="card-body">
+                            <p style="cursor: pointer;" data-toggle="collapse" data-target="#category">
+                                Category
+                            </p>
+                            <div class="collapse" id="category" data-parent="#accordion">
+                                <div class="card-body">
+                                    @foreach (string category in Model.Categories)
+                                    {
+                                        <a asp-controller="Courses" asp-action="All" asp-route-searchTerm="@category">@category</a>
+                                        <br/>
+                                    }
+                                </div>
+                            </div>
+                            <p style="cursor: pointer;" data-toggle="collapse" data-target="#language">
+                                Language
+                            </p>
+                            <div class="collapse" id="language" data-parent="#accordion">
+                                <div class="card-body">
+                                    @foreach (string language in Model.Languages)
+                                    {
+                                        <a asp-controller="Courses" asp-action="All" asp-route-searchTerm="@language">@language</a>
+                                        <br/>
+                                    }
+                                </div>
+                            </div>
+                            <p style="cursor: pointer;" data-toggle="collapse" data-target="#author">
+                                Author
+                            </p>
+                            <div class="collapse" id="author" data-parent="#accordion">
+                                <div class="card-body">
+                                    @foreach (string author in Model.Authors)
+                                    {
+                                        <a asp-controller="Courses" asp-action="All" asp-route-searchTerm="@author">@author</a>
+                                        <br/>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="card">
+                @if (TempData.ContainsKey("Approve"))
+                {
+                    <success message="@TempData["Approve"].ToString()"></success>
+                }
+                <div class="card-header text-center">
+                    <h2>Courses</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @foreach (Course course in Model.Paged)
+                            {
+                                <div class="row">
+                                    <h2 class="ml-2">
+                                        <a class="text-white" asp-controller="Courses" asp-action="Details" asp-route-id="@course.Id">@course.Name</a>
+                                    </h2>
+                                </div>
+                                <div class="row">
+                                    <p class="text-secondary">by @course.User.FullName</p>
+                                    <p class="text-secondary">@course.CreatedOn.ToString("dd MMMM yyyy")</p>
+                                </div>
+                                <hr class="bg-white"/>
+                            }
+                            <a asp-action="All" asp-route-page="@(Model.Paged.PageIndex + -1)" class="btn btn-primary @prevDisabled">Previous</a>
+                            <a asp-action="All" asp-route-page="@(Model.Paged.PageIndex + 1)" class="btn btn-primary @nextDisabled">Next</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

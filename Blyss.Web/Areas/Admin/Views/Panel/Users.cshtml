@@ -1,0 +1,48 @@
+﻿@model PaginatedList<AdminUserViewModel>
+@{
+    string prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    string nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-3">
+            <div class="list-group list-custom">
+                <a asp-area="Admin" asp-controller="Panel" asp-action="Users" class="list-group-item list-group-item-action">Users</a>
+                <a asp-area="Admin" asp-controller="Panel" asp-action="Approve" class="list-group-item list-group-item-action">Not Approved Courses</a>
+                <a asp-area="Admin" asp-controller="Panel" asp-action="Courses" class="list-group-item list-group-item-action">Courses</a>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h1>Registered Users</h1>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @foreach (AdminUserViewModel user in Model)
+                            {
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h2 class="ml-2">
+                                            <a class="text-white" asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@user.Id">@user.UserName</a>
+                                        </h2>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a class="btn btn-danger offset-6" asp-area="Admin" asp-controller="Panel" asp-action="DeleteUser" asp-route-id="@user.Id">Delete</a>
+                                    </div>
+                                </div>
+                                <hr class="bg-white"/>
+                            }
+                            <a asp-action="Users" asp-route-page="@(Model.PageIndex + -1)" class="btn btn-primary @prevDisabled">Previous</a>
+                            <a asp-action="Users" asp-route-page="@(Model.PageIndex + 1)" class="btn btn-primary @nextDisabled">Next</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

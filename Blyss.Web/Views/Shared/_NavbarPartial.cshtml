@@ -1,0 +1,12 @@
+﻿<ul class="navbar-nav ml-auto">
+
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <partial name="_LoginPartial"/>
+        <partial name="_RegisterPartial"/>
+    }
+    else
+    {
+        <partial name="_ProfilePartial"/>
+    }
+</ul>

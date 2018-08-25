@@ -1,0 +1,59 @@
+﻿@model RegisterBindingModel
+
+<div class="container">
+    <div class="col-md-4 offset-md-3 mt-5">
+        <div class="card card-register">
+            <div class="card-header">
+                <h3 class="mb-0 text-center">Register</h3>
+            </div>
+            <div class="card-body">
+
+                <error message="@ViewBag.Error"></error>
+
+                <success message="@ViewBag.Confirm"></success>
+
+                @if (ViewBag.InvalidPassword != null)
+                {
+                    foreach (string error in ViewBag.InvalidPassword)
+                    {
+                        <error message="@error"></error>
+                    }
+                }
+                <form asp-controller="Account" asp-action="Register" method="POST">
+                    <div class="form-group">
+                        <label asp-for="UserName">Username</label>
+                        <input asp-for="UserName" type="text" class="form-control" placeholder="Enter Username..."/>
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email">E-Mail</label>
+                        <input asp-for="Email" type="email" class="form-control" placeholder="Enter E-Mail..."/>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Country">Country</label>
+                        <select asp-for="Country" class="custom-select">
+                            <partial name="_CountryPartial"/>
+                        </select>
+                        <span class="text-danger" asp-validation-for="Country"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Password">Password</label>
+                        <input asp-for="Password" type="password" class="form-control" placeholder="Enter Password..."/>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword">Password</label>
+                        <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Confirm Password..."/>
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <a asp-controller="Account" asp-action="Login">Already have an account?</a>
+                        <button type="submit" class="btn btn-primary float-right">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

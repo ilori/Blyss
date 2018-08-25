@@ -1,0 +1,76 @@
+﻿@model UserSettingsBindingModel
+
+@inject UserManager<User> UserManager
+@{
+    User user = await UserManager.GetUserAsync(User);
+}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-3 ">
+            <div class="list-group list-custom">
+                <a asp-area="Users" asp-controller="Profile" asp-action="Settings" class="list-group-item list-group-item-action" id="user">User Settings</a>
+                <a asp-area="Users" asp-controller="Profile" asp-action="Password" class="list-group-item list-group-item-action" id="password">Password Settings</a>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4 class="text-center">User Settings</h4>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <error message="@ViewBag.Error"></error>
+                            <success message="@ViewBag.Success"></success>
+
+                            <form enctype="multipart/form-data" method="post" asp-area="Users" asp-controller="Profile" asp-action="Settings">
+                                <div class="form-group row">
+                                    <label asp-for="FirstName" class="col-4 col-form-label">First Name</label>
+                                    <div class="col-8">
+                                        <input asp-for="FirstName" value="@user.FirstName" placeholder="First Name" class="form-control" type="text">
+                                        <span class="text-danger" asp-validation-for="FirstName"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label asp-for="LastName" class="col-4 col-form-label">Last Name</label>
+                                    <div class="col-8">
+                                        <input asp-for="LastName" value="@user.LastName" placeholder="Last Name" class="form-control" type="text">
+                                        <span class="text-danger" asp-validation-for="LastName"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label asp-for="Description" class="col-4 col-form-label">Description</label>
+                                    <div class="col-8">
+                                        <textarea style="resize: none;" asp-for="Description" cols="40" rows="4" class="form-control"></textarea>
+                                        <span class="text-danger" asp-validation-for="Description"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-4">Choose Profle Picture</label>
+                                    <div class="col-8">
+                                        <div class="input-file-container">
+                                            <label asp-for="ProfilePicture" tabindex="0" class="input-file-trigger">Select a file...</label>
+                                            <input asp-for="ProfilePicture" class="input-file" id="my-file" type="file">
+                                            <span class="text-danger" asp-validation-for="ProfilePicture"></span>
+                                        </div>
+                                        <p class="file-return"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="offset-4 col-8">
+                                        <button name="submit" type="submit" class="btn btn-primary">Update My Profile</button>
+                                        <a class="btn btn-warning" href="/">Cancel</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

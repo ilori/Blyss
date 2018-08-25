@@ -1,0 +1,14 @@
+﻿@model Course
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="d-flex justify-content-center col-md-12">
+            <iframe width="1280" height="720" src="@Model.Video.YouTubeId" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-12 d-flex justify-content-center">
+            <a asp-area="Admin" asp-controller="Panel" asp-action="ApproveCourse" asp-route-id="@Model.Id" class="btn btn-success btn-lg">Approve</a>
+            <a asp-area="Admin" asp-controller="Panel" asp-action="DeleteCourse" asp-route-id="@Model.Id" class="btn btn-danger btn-lg ml-5">Delete</a>
+        </div>
+    </div>
+</div>

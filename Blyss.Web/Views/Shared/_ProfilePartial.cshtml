@@ -1,0 +1,29 @@
+﻿@inject UserManager<User> UserManager
+
+@{
+    User user = await UserManager.GetUserAsync(User);
+}
+@if (user != null)
+{
+    <li class="dropdown nav-item">
+        @if (user.ProfilePicture != null)
+        {
+            <img class="profile dropdown-toggle mt-3" src="data:image;base64,@Convert.ToBase64String(user.ProfilePicture)" alt="profile" data-toggle="dropdown"/>
+        }
+        else
+        {
+            <img class="profile dropdown-toggle mt-3" src="~/images/default-profile.jpg" alt="profile" data-toggle="dropdown"/>
+        }
+        <div class="dropdown-menu bg-dark">
+            @if (await UserManager.IsInRoleAsync(user, "Administrator"))
+            {
+                <a class="dropdown-item" asp-area="Admin" asp-controller="Panel" asp-action="Show">Admin Panel</a>
+            }
+            <a class="dropdown-item" asp-area="Users" asp-controller="Profile" asp-action="Settings">Settings</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@user.Id">Profile</a>
+            <a class="dropdown-item" asp-area="Users" asp-controller="Courses" asp-action="Create">Create Course</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Log Out</a>
+        </div>
+    </li>
+}

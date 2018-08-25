@@ -1,0 +1,63 @@
+﻿@model CourseEditBindingModel
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4 class="text-center">Edit Course</h4>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <error message="@ViewBag.Error"></error>
+
+                            <form enctype="multipart/form-data" method="post" asp-area="Users" asp-controller="Courses" asp-action="Edit">
+                                <div class="form-group row">
+                                    <label asp-for="Name" class="col-4 col-form-label">Name</label>
+                                    <div class="col-8">
+                                        <input value="@Model.Name" asp-for="Name" class="form-control" type="text">
+                                        <span asp-validation-for="Name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label asp-for="Description" class="col-4 col-form-label">Description</label>
+                                    <div class="col-8">
+                                        <textarea style="resize: none;" asp-for="Description" cols="40" rows="4" class="form-control"></textarea>
+                                        <span asp-validation-for="Description" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label asp-for="Video" class="col-4 col-form-label">YouTube Id</label>
+                                    <div class="col-8">
+                                        <input asp-for="Video" class="form-control" type="text">
+                                        <span asp-validation-for="Video" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label asp-for="Category" class="col-4 col-form-label">Category</label>
+                                    <div class="col-8">
+                                        <select asp-for="Category" asp-items="@(new SelectList(Model.Categories, "Name"))" class="custom-select"></select>
+                                        <span asp-validation-for="Category" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label asp-for="Language" class="col-4 col-form-label">Language</label>
+                                    <div class="col-8">
+                                        <select asp-for="Language" asp-items="@(new SelectList(Model.Languages, "Name"))" class="custom-select"></select>
+                                        <span asp-validation-for="Category" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary float-right">Save Changes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
