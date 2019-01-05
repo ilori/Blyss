@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blyss.Services", "Blyss.Ser
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blyss.Infrastructure", "Blyss.Infrastructure\Blyss.Infrastructure.csproj", "{337A653B-FA74-4C8F-A863-72DC1281B4C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blyss.Tests", "Blyss.Tests\Blyss.Tests.csproj", "{2042D658-6CE3-4C30-9D23-3EA5785F3E0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blyss.Tests", "Blyss.Tests\Blyss.Tests.csproj", "{2042D658-6CE3-4C30-9D23-3EA5785F3E0E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
