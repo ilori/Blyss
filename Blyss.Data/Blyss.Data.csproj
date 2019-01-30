@@ -6,8 +6,8 @@
 
   <ItemGroup>
     <PackageReference Include="microsoft.aspnetcore.identity.entityframeworkcore" Version="2.2.0" />
-    <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="2.2.0" />
-    <PackageReference Include="microsoft.entityframeworkcore.tools" Version="2.2.0">
+    <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="2.2.1" />
+    <PackageReference Include="microsoft.entityframeworkcore.tools" Version="2.2.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
